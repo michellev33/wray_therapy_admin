@@ -13,8 +13,8 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/admin/subscribers" children={<Subscribers />} />
-          <Route exact path="/admin/subscribers/:id" children={<SubscriberDetail />} />
+          <Route exact path="/subscribers" children={<Subscribers />} />
+          <Route exact path="/subscribers/:id" children={<SubscriberDetail />} />
         </Switch>
       </Router>
     )
