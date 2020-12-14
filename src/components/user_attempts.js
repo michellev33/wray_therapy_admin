@@ -29,7 +29,7 @@ const UserAttempts = () => {
         <div className="card" key={attempt.id}>
           <div className="card-body">
             <Link to={"/users/" + attempt.userId + "/attempts/" + attempt.id}><h5 className="card-title">World: {attempt.world}</h5></Link>
-            <h5>Date: {attempt.date}</h5>
+            <h5>Date: {(new Date(attempt.date)).toLocaleString()}</h5>
           </div>
         </div>
       ))}

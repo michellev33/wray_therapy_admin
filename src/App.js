@@ -26,7 +26,7 @@ class App extends Component {
           <Route exact path="/addUser" children={<AddUser />} />
           <Route exact path="/users/:id" children={<UserDetail />} />
           <Route exact path="/users/:id/attempts" children={<UserAttempts />} />
-          <Route exact path="/users/:id/attempts/:id" children={<UserAttemptDetails />} />
+          <Route exact path="/users/:id/attempts/:attemptId" children={<UserAttemptDetails />} />
         </Switch>
       </Router>
     )

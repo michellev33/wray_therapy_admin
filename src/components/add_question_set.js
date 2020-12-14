@@ -47,19 +47,36 @@ class QuestionSets extends Component {
           <center><h1>Add Question Set</h1></center>
           <div className="post">
               <form className="post" onSubmit={this.handleSubmit}>
-                  <input
-                  placeholder="Grade" value={this.state.title}
-                  onChange={this.onGradeChange} required
-                  />
-                  <input
-                  placeholder="Subject" value={this.state.body}
-                  onChange={this.onSubjectChange} required
-                  />
-                  <input
-                  placeholder="Topic" value={this.state.body}
-                  onChange={this.onTopicChange} required
-                  />
-                  <button type="submit">Create Question Set</button>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Grade</h5>
+                      <input
+                      placeholder="Grade" value={this.state.title}
+                      onChange={this.onGradeChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Subject</h5>
+                      <input
+                      placeholder="Subject" value={this.state.body}
+                      onChange={this.onSubjectChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Topic</h5>
+                      <input
+                      placeholder="Topic" value={this.state.body}
+                      onChange={this.onTopicChange} required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <button type="submit">Create Question Set</button>
+                  </div>
                 </form>
             </div>
         </div>

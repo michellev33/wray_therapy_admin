@@ -6,7 +6,7 @@ import axios from 'axios';
 const UserAttemptDetails = () => {
 
     const [attemptDetails, setAttemptDetails] = useState([]);
-    const attemptDetailsUrl = process.env.REACT_APP_SERVICE_API_URL + '/users/' + useParams().id + '/attempts/' + useParams().id;
+    const attemptDetailsUrl = process.env.REACT_APP_SERVICE_API_URL + '/users/' + useParams().id + '/attempts/' + useParams().attemptId;
 
     const gameAttemptId = attemptDetailsUrl.charAt(attemptDetailsUrl.length - 1);
 
@@ -51,14 +51,14 @@ const UserAttemptDetails = () => {
         }
         return color;
     }
-    
+
     return (
     <div style={{display: "flex"}}>
         <div style={{flexGrow: 1, marginLeft: 0}}>
             <center><h1>Game Attempt: {gameAttemptId}</h1></center>
             <h3>World: {currentAttempt.world}</h3>
-            <h3>Date: {currentAttempt.date}</h3>
-            <h3>Score: {currentAttempt.totalscore}/25</h3>
+            <h3>Date: {(new Date(currentAttempt.date)).toLocaleString()}</h3>
+            <h3>Score: {currentAttempt.totalscore}/{attemptDetails.length}</h3>
             <h3>Game Time: {currentAttempt.totaltime} sec</h3>
         </div>
 

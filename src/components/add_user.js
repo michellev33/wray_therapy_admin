@@ -31,11 +31,18 @@ class AddUser extends Component {
         <center><h1>Add User</h1></center>
         <div className="post">
             <form className="post" onSubmit={this.handleSubmit}>
+            <div className="card">
+              <div className="card-body">
+                <h5>Username</h5>
                 <input
                 placeholder="User" value={this.state.username}
                 onChange={this.onUserChange} required
                 />
-                <button type="submit">Create User</button>
+              </div>
+            </div>
+            <div>
+              <button type="submit">Create User</button>
+            </div>
               </form>
           </div>
       </div>

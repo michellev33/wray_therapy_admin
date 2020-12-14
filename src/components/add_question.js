@@ -1,19 +1,11 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import Select from 'react-select';
 import axios from 'axios';
 import QuestionSets from './add_question_set';
 
 class Questions extends Component {
-    /*state = {
-      question: "",
-      optionOne: "",
-      optionTwo: "",
-      optionThree: "",
-      optionFour: "",
-      answer: "",
-      questionSetId: []
-    };*/
 
     constructor(props) {
         super(props)
@@ -30,25 +22,14 @@ class Questions extends Component {
 
     async getOptions(){
         const res = await axios.get(process.env.REACT_APP_SERVICE_API_URL + "/questionSets")
-        const data = Object(res.data)
+        const data = res.data
     
         const options = data.map(d => ({
-            "id" : d.id,
-            "grade" : d.grade,
-            "subject" : d.subject,
-            "topic" : d.topic
+            "value" : d.id,
+            "label" : "Grade: " + d.grade + ", Subject: " + d.subject + ", Topic: " + d.topic
         }))
         this.setState({questionSetId: options})
     }
-
-    componentDidMount() {
-        this.getOptions()
-        /*axios.get(process.env.REACT_APP_SERVICE_API_URL + "/questionSets")
-          .then(res => {
-            const questionSets = Object(res.data);
-            this.setState({ questionSets });
-          })*/
-      }
 
     onQuestionChange = e => {
       this.setState({
@@ -82,15 +63,15 @@ class Questions extends Component {
 
     onAnswerChange = e => {
         this.setState({
-          answer: []
+          answer: e.target.value
         });
     };
 
-    /*onQuestionSetChange = e => {
+    onQuestionSetChange(e){
         this.setState({
-          questionSetId: e.target.value
+          questionSetId: e.value
         });
-    };*/
+    };
 
     handleSubmit = e => {
       e.preventDefault();
@@ -109,13 +90,9 @@ class Questions extends Component {
         .catch(err => console.log(err));
     };
 
-   /* <ul>
-    { this.state.questionSets.map(questionSet => <li>{questionSet.subject}</li>)}
-    </ul> 
-    <input
-                    placeholder="Question Set" value={this.state.body}
-                    onChange={this.onQuestionSetChange} required
-                    /> */
+    componentDidMount() {
+      this.getOptions()
+    }
   
     render() {
         return (
@@ -123,31 +100,69 @@ class Questions extends Component {
             <center><h1>Add Question</h1></center>
             <div className="post">
                 <form className="post" onSubmit={this.handleSubmit}>
-                    <input
-                    placeholder="Question" value={this.state.title}
-                    onChange={this.onQuestionChange} required
-                    />
-                    <input
-                    placeholder="Option One" value={this.state.body}
-                    onChange={this.onOptionOneChange} required
-                    />
-                    <input
-                    placeholder="Option Two" value={this.state.body}
-                    onChange={this.onOptionTwoChange} required
-                    />
-                    <input
-                    placeholder="Option Three" value={this.state.body}
-                    onChange={this.onOptionThreeChange} required
-                    />
-                    <input
-                    placeholder="Option Four" value={this.state.body}
-                    onChange={this.onOptionFourChange} required
-                    />
-                    <input
-                    placeholder="Answer" value={this.state.body}
-                    onChange={this.onAnswerChange} required
-                    />
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Question</h5>
+                      <input
+                      placeholder="Question" value={this.state.title}
+                      onChange={this.onQuestionChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Option One</h5>
+                      <input
+                      placeholder="Option One" value={this.state.body}
+                      onChange={this.onOptionOneChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Option Two</h5>
+                      <input
+                      placeholder="Option Two" value={this.state.body}
+                      onChange={this.onOptionTwoChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Option Three</h5>
+                      <input
+                      placeholder="Option Three" value={this.state.body}
+                      onChange={this.onOptionThreeChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Option Four</h5>
+                      <input
+                      placeholder="Option Four" value={this.state.body}
+                      onChange={this.onOptionFourChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Answer</h5>
+                      <input
+                      placeholder="Answer" value={this.state.body}
+                      onChange={this.onAnswerChange} required
+                      />
+                    </div>
+                  </div>
+                  <div className="card">
+                    <div className="card-body">
+                      <h5>Question Set</h5>
+                      <Select options = {this.state.questionSetId} onChange={this.onQuestionSetChange.bind(this)}/>
+                    </div>
+                  </div>
+                  <div>
                     <button type="submit">Create Question Set</button>
+                  </div>
                   </form>
               </div>
           </div>
