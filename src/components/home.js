@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import { Link } from "react-router-dom";
-import { useParams } from "react-router";
-import axios from 'axios';
 
 const Home = () => {
     return (
@@ -19,7 +17,7 @@ const Home = () => {
         </div>
         <div className="card">
             <div className="card-body">
-                <Link to={"/questions"}><h5 className="card-title">Create new questions</h5></Link>
+                <Link to={"/questions"}><h5 className="card-title">Create new question</h5></Link>
             </div>
         </div>
     </div>

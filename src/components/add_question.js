@@ -1,9 +1,7 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import { useParams } from "react-router";
+import React, { Component } from 'react';
 import Select from 'react-select';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
-import QuestionSets from './add_question_set';
 
 class Questions extends Component {
 
@@ -86,7 +84,10 @@ class Questions extends Component {
       };
       axios
         .post(process.env.REACT_APP_SERVICE_API_URL + "/questions", data)
-        .then(res => console.log(res))
+        .then(res => 
+          console.log(res),
+          this.props.history.push("/")
+          )
         .catch(err => console.log(err));
     };
 
@@ -161,7 +162,7 @@ class Questions extends Component {
                     </div>
                   </div>
                   <div>
-                    <button type="submit">Create Question Set</button>
+                    <button type="submit">Create Question</button>
                   </div>
                   </form>
               </div>
@@ -170,4 +171,4 @@ class Questions extends Component {
       }
   }
 
-  export default Questions
+  export default withRouter(Questions);

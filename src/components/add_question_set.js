@@ -1,6 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import { useParams } from "react-router";
+import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class QuestionSets extends Component {
@@ -37,7 +36,10 @@ class QuestionSets extends Component {
       };
       axios
         .post(process.env.REACT_APP_SERVICE_API_URL + "/questionSets", data)
-        .then(res => console.log(res))
+        .then(res => 
+          console.log(res),
+          this.props.history.push("/")
+          )
         .catch(err => console.log(err));
     };
   
@@ -84,4 +86,4 @@ class QuestionSets extends Component {
     }
   }
 
-  export default QuestionSets
+  export default withRouter(QuestionSets);

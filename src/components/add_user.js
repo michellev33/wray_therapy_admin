@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class AddUser extends Component {
@@ -21,7 +21,10 @@ class AddUser extends Component {
     };
     axios
       .post(process.env.REACT_APP_SERVICE_API_URL + "/users", data)
-      .then(res => console.log(res))
+      .then(res => 
+        console.log(res),
+        this.props.history.push("/users")
+        )
       .catch(err => console.log(err));
   };
 
@@ -52,4 +55,4 @@ class AddUser extends Component {
 };
 
 
-export default AddUser
+export default withRouter(AddUser);
