@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class AddUser extends Component {
@@ -31,28 +31,41 @@ class AddUser extends Component {
   render() {
     return (
     <div>
-        <center><h1>Add User</h1></center>
-        <div className="post">
-            <form className="post" onSubmit={this.handleSubmit}>
-            <div className="card">
-              <div className="card-body">
-                <h5>Username</h5>
-                <input
-                placeholder="User" value={this.state.username}
+
+      <div className="row h1 p-4">
+        <div className="col-md-10">
+          <Link to={"/"}>WrayTherapy</Link> - Add User
+        </div>
+        <div className="col-md-2 text-right">
+          <Link to={"/users"}><h5 class="btn btn-outline-primary">&laquo; back to user list</h5></Link>
+        </div>
+      </div>
+    
+      <div className="post">
+        <form className="post" onSubmit={this.handleSubmit}>
+          <div className="card">
+            <div className="card-body">
+
+              <div class="form-group">
+                <label className="h5">Username</label>
+                <input className="form-control col-md-6"
+                placeholder="User name" value={this.state.username}
                 onChange={this.onUserChange} required
                 />
               </div>
+              
+              <hr />
+              <div>
+                <button className="btn btn-primary" type="submit">Create User</button>
+              </div>
             </div>
-            <div>
-              <button type="submit">Create User</button>
-            </div>
-              </form>
           </div>
+        </form>
       </div>
+    </div>
     );
   }
 
 };
-
 
 export default withRouter(AddUser);

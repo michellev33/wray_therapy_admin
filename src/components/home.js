@@ -4,20 +4,28 @@ import { Link } from "react-router-dom";
 const Home = () => {
     return (
     <div>
-        <center><h1>WrayTherapy</h1></center>
-        <div className="card">
-            <div className="card-body">
-                <Link to={"/users"}><h5 className="card-title">View users</h5></Link>
+        <h1 className="p-4">WrayTherapy</h1>
+        <div className="p-4 row">
+            <div className="col-md-4">
+                <div className="card text-center">
+                    <div className="card-body">
+                        <Link to={"/users"} className="btn btn-lg btn-primary btn-block p-5"><span className="h2">Users</span></Link>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className="card">
-            <div className="card-body">
-                <Link to={"/questionSets"}><h5 className="card-title">Create new question set</h5></Link>
+            <div className="col-md-4 text-center">
+                <div className="card">
+                    <div className="card-body">
+                        <Link to={"/questionSets"} className="btn btn-lg btn-primary btn-block p-5"><span className="h2">Question Sets</span></Link>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className="card">
-            <div className="card-body">
-                <Link to={"/questions"}><h5 className="card-title">Create new question</h5></Link>
+            <div className="col-md-4 text-center">
+                <div className="card">
+                    <div className="card-body">
+                        <Link to={"/questions"} className="btn btn-lg btn-primary btn-block p-5"><span className="h2">Questions</span></Link>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

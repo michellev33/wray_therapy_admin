@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
-class Questions extends Component {
+class AddQuestion extends Component {
 
     constructor(props) {
         super(props)
@@ -86,7 +86,7 @@ class Questions extends Component {
         .post(process.env.REACT_APP_SERVICE_API_URL + "/questions", data)
         .then(res => 
           console.log(res),
-          this.props.history.push("/")
+          this.props.history.push("/questions")
           )
         .catch(err => console.log(err));
     };
@@ -98,77 +98,84 @@ class Questions extends Component {
     render() {
         return (
         <div>
-            <center><h1>Add Question</h1></center>
+
+          <div className="row h1 p-4">
+            <div className="col-md-10">
+              <Link to={"/"}>WrayTherapy</Link> - Add Question
+            </div>
+            <div className="col-md-2 text-right">
+              <Link to={"/questions"}><h5 class="btn btn-outline-primary">&laquo; back to question list</h5></Link>
+            </div>
+          </div>
+
             <div className="post">
                 <form className="post" onSubmit={this.handleSubmit}>
                   <div className="card">
                     <div className="card-body">
-                      <h5>Question</h5>
-                      <input
-                      placeholder="Question" value={this.state.title}
-                      onChange={this.onQuestionChange} required
-                      />
+                      <div class="form-group">
+                        <label className="h5">Question</label>
+                        <input className="form-control"
+                        placeholder="Question" value={this.state.title}
+                        onChange={this.onQuestionChange} required
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <label className="h5">Option One</label>
+                        <input className="form-control col-md-6"
+                        placeholder="Option One" value={this.state.body}
+                        onChange={this.onOptionOneChange} required
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <label className="h5">Option Two</label>
+                        <input className="form-control col-md-6"
+                        placeholder="Option Two" value={this.state.body}
+                        onChange={this.onOptionTwoChange} required
+                        />
+                      </div>
+    
+                      <div class="form-group">
+                        <label className="h5">Option Three</label>
+                        <input className="form-control col-md-6"
+                        placeholder="Option Three" value={this.state.body}
+                        onChange={this.onOptionThreeChange} required
+                        />
+                      </div>
+       
+                      <div class="form-group">
+                        <label className="h5">Option Four</label>
+                        <input className="form-control col-md-6"
+                        placeholder="Option Four" value={this.state.body}
+                        onChange={this.onOptionFourChange} required
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <label className="h5">Answer</label>
+                        <input className="form-control col-md-6"
+                        placeholder="Answer" value={this.state.body}
+                        onChange={this.onAnswerChange} required
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <label className="h5">Question Set</label>
+                        <Select options = {this.state.questionSetId} onChange={this.onQuestionSetChange.bind(this)}/>
+                      </div>
+
+                      <hr />
+                      <div>
+                        <button className="btn btn-primary" type="submit">Create Question</button>
+                      </div>
                     </div>
                   </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Option One</h5>
-                      <input
-                      placeholder="Option One" value={this.state.body}
-                      onChange={this.onOptionOneChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Option Two</h5>
-                      <input
-                      placeholder="Option Two" value={this.state.body}
-                      onChange={this.onOptionTwoChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Option Three</h5>
-                      <input
-                      placeholder="Option Three" value={this.state.body}
-                      onChange={this.onOptionThreeChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Option Four</h5>
-                      <input
-                      placeholder="Option Four" value={this.state.body}
-                      onChange={this.onOptionFourChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Answer</h5>
-                      <input
-                      placeholder="Answer" value={this.state.body}
-                      onChange={this.onAnswerChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Question Set</h5>
-                      <Select options = {this.state.questionSetId} onChange={this.onQuestionSetChange.bind(this)}/>
-                    </div>
-                  </div>
-                  <div>
-                    <button type="submit">Create Question</button>
-                  </div>
-                  </form>
+                </form>
               </div>
           </div>
         );
       }
   }
 
-  export default withRouter(Questions);
+  export default withRouter(AddQuestion);

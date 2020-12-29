@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class QuestionSets extends Component {
@@ -38,49 +38,61 @@ class QuestionSets extends Component {
         .post(process.env.REACT_APP_SERVICE_API_URL + "/questionSets", data)
         .then(res => 
           console.log(res),
-          this.props.history.push("/")
+          this.props.history.push("/questionSets")
           )
         .catch(err => console.log(err));
     };
   
     render() {
       return (
-      <div>
-          <center><h1>Add Question Set</h1></center>
-          <div className="post">
-              <form className="post" onSubmit={this.handleSubmit}>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Grade</h5>
-                      <input
-                      placeholder="Grade" value={this.state.title}
-                      onChange={this.onGradeChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Subject</h5>
-                      <input
-                      placeholder="Subject" value={this.state.body}
-                      onChange={this.onSubjectChange} required
-                      />
-                    </div>
-                  </div>
-                  <div className="card">
-                    <div className="card-body">
-                      <h5>Topic</h5>
-                      <input
-                      placeholder="Topic" value={this.state.body}
-                      onChange={this.onTopicChange} required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <button type="submit">Create Question Set</button>
-                  </div>
-                </form>
+        <div>
+
+          <div className="row h1 p-4">
+            <div className="col-md-10">
+              <Link to={"/"}>WrayTherapy</Link> - Add Question Set
             </div>
+            <div className="col-md-2 text-right">
+              <Link to={"/questionSets"}><h5 class="btn btn-outline-primary">&laquo; back to question set list</h5></Link>
+            </div>
+          </div>
+
+          <div className="post">
+            <form className="post" onSubmit={this.handleSubmit}>
+              <div className="card">
+                <div className="card-body">
+
+                  <div class="form-group">
+                    <label className="h5">Grade</label>
+                    <input className="form-control col-md-2"
+                    placeholder="Grade" value={this.state.title}
+                    onChange={this.onGradeChange} required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label className="h5">Subject</label>
+                    <input className="form-control col-md-4"
+                    placeholder="Subject" value={this.state.body}
+                    onChange={this.onSubjectChange} required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label className="h5">Topic</label>
+                    <input className="form-control col-md-6"
+                    placeholder="Topic" value={this.state.body}
+                    onChange={this.onTopicChange} required
+                    />
+                  </div>
+
+                  <hr />
+                  <div>
+                    <button className="btn btn-primary" type="submit">Create Question Set</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

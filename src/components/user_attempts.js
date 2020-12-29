@@ -7,6 +7,7 @@ const UserAttempts = () => {
   
   const [attempts, setAttempts] = useState([]);
   const attemptsUrl = process.env.REACT_APP_SERVICE_API_URL + '/users/' + useParams().id + '/attempts';
+  const userUrl = process.env.REACT_APP_SERVICE_API_URL + '/users/' + useParams().id;
   
   const getAttempts = async (setAttempts) => {
     try {
@@ -21,10 +22,19 @@ const UserAttempts = () => {
     getAttempts(setAttempts)
   }, [])
 
+  const options = {year: 'numeric', month: 'long', day: 'numeric'};
+
   return (
     <div>
-      <center><h1>Progress Report</h1></center>
-      <center><h2>Game Attempts</h2></center>
+      <div className="row h1 p-4">
+        <div className="col-md-10">
+          <Link to={"/"}>WrayTherapy</Link> - Progress Report
+        </div>
+        <div className="col-md-2 text-right">
+          <Link to={"/users/" + useParams().id}><h5 class="btn btn-outline-primary">&laquo; back to user details</h5></Link>
+        </div>
+      </div>
+
       {attempts.map((attempt) => (
         <div className="card" key={attempt.id}>
           <div className="card-body">

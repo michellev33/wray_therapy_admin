@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const UserAttemptDetails = () => {
@@ -7,7 +8,8 @@ const UserAttemptDetails = () => {
     const [attemptDetails, setAttemptDetails] = useState([]);
     const attemptDetailsUrl = process.env.REACT_APP_SERVICE_API_URL + '/users/' + useParams().id + '/attempts/' + useParams().attemptId;
 
-    const gameAttemptId = attemptDetailsUrl.charAt(attemptDetailsUrl.length - 1);
+    const attemptIndex = attemptDetailsUrl.lastIndexOf('/');
+    const gameAttemptId = attemptDetailsUrl.substring(attemptIndex + 1);
 
     const getAttemptDetails = async (setAttemptDetails) => {
         try {
@@ -42,45 +44,64 @@ const UserAttemptDetails = () => {
     {
         if (val == false)
         {
-            var color = '#FF6347';
+            var color = '#ffb3b3';
         }
         if (val == true)
         {
-            var color = '#90EE90';
+            var color = '#99ff99';
         }
         return color;
     }
 
     return (
-    <div style={{display: "flex"}}>
-        <div style={{flexGrow: 1, marginLeft: 0}}>
-            <center><h1>Game Attempt: {gameAttemptId}</h1></center>
-            <h3>World: {currentAttempt.world}</h3>
-            <h3>Date: {(new Date(currentAttempt.date)).toLocaleString()}</h3>
-            <h3>Score: {currentAttempt.totalscore}/{attemptDetails.length}</h3>
-            <h3>Game Time: {currentAttempt.totaltime} sec</h3>
+      <div>
+
+        <div className="row h1 p-4">
+          <div className="col-md-10">
+            <Link to={"/"}>WrayTherapy</Link> - Game Attempt: {gameAttemptId}
+          </div>
+          <div className="col-md-2 text-right">
+            <Link to={"/users/" + useParams().id + "/attempts"}><h5 class="btn btn-outline-primary">&laquo; back to attempts list</h5></Link>
+          </div>
         </div>
 
-        <div style={{width: 1000}}>
-            <div className="card" >
-                <div className="card-body">
-                    <center><h3 className="card-text">Questions</h3></center>
+        <div className="card">
+          <div className="card-body">
+
+            <div style={{display: "flex"}}>
+
+              <div style={{flexGrow: 1, marginLeft: 0}}>
+                <strong>World</strong>: {currentAttempt.world}<br />
+                <strong>Date</strong>: {(new Date(currentAttempt.date)).toLocaleString()}<br />
+                <strong>Score</strong>: {currentAttempt.totalscore}/{attemptDetails.length}<br />
+                <strong>Game Time</strong>: {currentAttempt.totaltime} sec<br />
+              </div>
+              
+              <div style={{width: 1000}}>
+                <div className="card" >
+                  <div className="card-body">
+                    <center><h4 className="card-text">Questions</h4></center>
+                  </div>
                 </div>
+                {attemptDetails.map((attemptData) => (
+                  <div className="card" key={attemptData.id}>
+                    <div className="card-body">
+                      <div style={{backgroundColor: changeColor(attemptData.correct)}} className="card-body">
+                        <strong>Question ID</strong>: <Link to={"/questions/" + attemptData.questionId}>{attemptData.questionId}</Link><br />
+                        <strong>Answer Selected</strong>: {attemptData.picked}<br />
+                        <strong>Time</strong>: {attemptData.time} sec<br />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
             </div>
 
-        {attemptDetails.map((attemptData) => (
-        <div className="card" key={attemptData.id}>
-            <div className="card-body">
-                <div style={{backgroundColor: changeColor(attemptData.correct)}} className="card-body">
-                    <h3>Question Id: {attemptData.questionId}</h3>
-                    <h3>Answer Selected: {attemptData.picked}</h3>
-                    <h3>Time: {attemptData.time} sec</h3>
-                </div>
-            </div>
+          </div>
         </div>
-        ))}
-        </div>
-    </div>
+
+      </div>
     )
 };
 

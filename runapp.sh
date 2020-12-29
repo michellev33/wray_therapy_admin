@@ -1,3 +1,4 @@
 #!/bin/bash
-export REACT_APP_SERVICE_API_URL='http://localhost:8080/api'
+cd /home/ubuntu/wray_therapy_admin
+export REACT_APP_SERVICE_API_URL='http://52.7.118.252:8080/api'
 npm start

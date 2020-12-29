@@ -20,25 +20,28 @@ const Users = () => {
     getUsers(setUsers)
   }, [])
 
+  return (
+    <div>
 
-    return (
-      <div>
-        <center><h1>Users</h1></center>
-        <div className="card">
-            <div className="card-body">
-                <Link to={"/addUser"}><h5 className="card-title">Create new user</h5></Link>
-            </div>
+      <div className="row h1 p-4">
+        <div className="col-md-10">
+          <Link to={"/"}>WrayTherapy</Link> - Users
         </div>
-        {users.map((user) => (
-          <div className="card" key={user.id}>
-            <div className="card-body">
-              <Link to={"/users/" + user.id}><h5 className="card-title">{user.username}</h5></Link>
-            </div>
-          </div>
-        ))}
+        <div className="col-md-2 text-right">
+          <Link to={"/addUser"}><h5 className="btn btn-outline-primary">Add User</h5></Link>
+        </div>
       </div>
-    );
-};
 
+      <div className="card">
+        <div className="card-body">
+          {users.map((user) => (
+            <Link to={"/users/" + user.id}><h5 className="card-title">{user.username}</h5></Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+
+}
 
 export default Users
